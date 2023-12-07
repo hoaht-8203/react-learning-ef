@@ -20,7 +20,11 @@ function AlbumItem(props) {
             <div className='album-content'>
                 <h3>{albumItem.name}</h3>
             </div>
-            <a href='https://soundcloud.com/liutiudiu/binz-hit-me-up-feat-nomovodka' target='_blank' className='playcircle'>
+            <a 
+                href='https://soundcloud.com/liutiudiu/binz-hit-me-up-feat-nomovodka' 
+                target='_blank' 
+                className='playcircle'
+            >
                 <PlayCircle size={30} />
             </a>
         </div>

@@ -1,0 +1,9 @@
+.todo-item {
+    font-weight: bold;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #ccc;
+}
+

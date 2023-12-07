@@ -1,10 +1,12 @@
+import React from 'react';
 import './App.css';
-import AlbumFeature from './features/Album';
 import TodoFeature from './features/Todo';
 
 function App() {
   return (
-    <AlbumFeature/>
+    <div>
+      <TodoFeature/>
+    </div>
   );
 }
 
