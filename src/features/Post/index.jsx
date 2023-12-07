@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import PostList from './components/PostList';
 import './styles.css'
 
-PostFeature.propTypes = {
-    
-};
+class PostFeature extends PureComponent {
+    constructor(props) {
+        super(props)
+        
+        this.isComponentMounted = false
+        this.state = {
+            loading: true,
+            postList: [],
+        }
+    }
 
-function PostFeature(props) {
-    return (
-        <div>
-            <PostList/>
-        </div>
-    );
+    async componentDidMount() {
+        this.isComponentMounted = true
+
+        try {
+            await fetch('https://jsonplaceholder.typicode.com/comments')
+                .then(response => response.json())
+                .then((data) => {
+                    if (this.isComponentMounted) {
+                        this.setState({
+                            postList: data,
+                            loading:false,
+                        })
+                    }
+                })
+        } catch (error) {
+            console.log('Failed to connect to api!', error)
+            this.state({loading: false})
+        }
+    }
+
+    componentWillUnmount() {
+        this.isComponentMounted = false
+    }
+
+    render() {
+        const { loading, postList } = this.state
+        if (loading) return <h3 style={{color: 'white'}}>Loading...</h3>
+
+        return <PostList postList={postList} />
+    }
 }
+
 
 export default PostFeature;
