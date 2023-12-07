@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import TodoFeature from './features/Todo';
+import PostFeature from './features/Post';
 
 function App() {
   return (
     <div>
-      <TodoFeature/>
+      <PostFeature/>
     </div>
   );
 }

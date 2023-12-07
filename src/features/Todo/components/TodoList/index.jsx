@@ -5,12 +5,14 @@ import './styles.css'
 
 TodoList.propTypes = {
     todoList: PropTypes.array,
-    onClinkTodo: PropTypes.func
+    onClinkTodo: PropTypes.func,
+    displayType: PropTypes.string,
 };
 
 TodoList.defaultProps = {
     todoList: [],
     onClinkTodo: null,
+    displayType: 'all',
 }
 
 function TodoList(props) {
