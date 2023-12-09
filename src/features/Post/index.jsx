@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import PostList from './components/PostList';
 import './styles.css'
+import Loading from '../../components/Loading';
 
 class PostFeature extends PureComponent {
     constructor(props) {
@@ -40,7 +41,7 @@ class PostFeature extends PureComponent {
 
     render() {
         const { loading, postList } = this.state
-        if (loading) return <h3 style={{color: 'white'}}>Loading...</h3>
+        if (loading) return <Loading/>
 
         return <PostList postList={postList} />
     }

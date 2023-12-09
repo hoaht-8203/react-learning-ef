@@ -8,9 +8,7 @@ Loading.propTypes = {
 
 function Loading(props) {
     return (
-        <div>
-            
-        </div>
+        <h1>LOADING...</h1>
     );
 }
 
