@@ -5,19 +5,26 @@ ColorBox.propTypes = {
     
 };
 
+const colors = ['deeppink', 'green', 'yellow', 'black', 'blue']
+
 function ColorBox(props) {
-    const [ color, setColor ] = useState('green')
+    const [ color, setColor ] = useState(() => {
+        return localStorage.getItem('main_color') || 'deeppink'
+    })
     
+    const handleChangeColor = () => {
+        let color = colors[Math.floor(Math.random()*colors.length)]
+        setColor(color)
+        localStorage.setItem('main_color', color)
+    }
 
     return (
         <div>
-            <div 
-                style={{backgroundColor: color, width: '200px', height: '200px'}}
+            <div
+                onClick={handleChangeColor}
+                style={{backgroundColor: color, width: '200px', height: '200px', border: '1px solid black'}}
             >
             </div>
-            
-            <button onClick={() => setColor('red')}>Change to red</button>
-            <button onClick={() => setColor('green')}>Change to green</button>
         </div>
     );
 }
