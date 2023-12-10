@@ -6,7 +6,6 @@ import TodoFeature from './features/Todo';
 import ColorBox from './components/ColorBox'
 import { Route } from 'react-router-dom';
 import { Link, NavLink, Redirect, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import TodoFeature2 from './features/Todo2';
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
         <Route path='/albums' component={AlbumFeature}/>
         <Route path='/posts' component={PostFeature}/>
         <Route path='/colorbox' component={ColorBox}/>
-        <Route path='/todos2' component={TodoFeature2}/>
       </Switch>
       <h1>Footer</h1>
     </div>
