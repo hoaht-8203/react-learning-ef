@@ -4,29 +4,28 @@ import PostFeature from './features/Post';
 import AlbumFeature from './features/Album';
 import TodoFeature from './features/Todo';
 import ColorBox from './components/ColorBox'
-import { Route } from 'react-router-dom';
-import { Link, NavLink, Redirect, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import NotFound from './components/NotFound'
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function App() {
   return (
     <div>
       <h1>Header</h1>
-      <p><Link to='/todos'>Todos</Link> -  <Link to='/albums'>albums</Link> - <Link to='/posts'>posts</Link></p>
       <p>
-        <NavLink to='/todos' activeClassName='active-menu'>Todos</NavLink> -  
-        <NavLink to='/albums' activeClassName='active-menu'>albums</NavLink> - 
-        <NavLink to='/posts' activeClassName='active-menu'>posts</NavLink>
+        <NavLink to='/todos' className={(nav) => (nav.isActive ? 'active-menu' : '')}>Todos</NavLink> -  
+        <NavLink to='/albums' className={(nav) => (nav.isActive ? 'active-menu' : '')}>albums</NavLink> - 
+        <NavLink to='/posts' className={(nav) => (nav.isActive ? 'active-menu' : '')}>posts</NavLink>
       </p>
 
-      <Switch>
-        <Redirect from='/home' to='/todos' exact />
-
-        <Route path='/' component={TodoFeature} exact/>
-        <Route path='/todos' component={TodoFeature}/>
-        <Route path='/albums' component={AlbumFeature}/>
-        <Route path='/posts' component={PostFeature}/>
-        <Route path='/colorbox' component={ColorBox}/>
-      </Switch>
+      <Routes>
+        <Route path='/' element={<Navigate to='/todos'/>}/>
+        <Route path='/todos/*' element={<TodoFeature/>}/>
+        <Route path='/albums' element={<AlbumFeature/>}/>
+        <Route path='/posts' element={<PostFeature/>}/>
+        <Route path='/colorbox' element={<ColorBox/>}/>
+        <Route path='*' element={<NotFound />} />
+      </Routes>
       <h1>Footer</h1>
     </div>
   );

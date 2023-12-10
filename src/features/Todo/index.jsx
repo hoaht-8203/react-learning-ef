@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
+import React from 'react';
 import ListPage from './pages/ListPage/index,';
 import DetailPage from './pages/DetailPage';
+import { Route, Routes } from 'react-router';
+import NotFound from '../../components/NotFound';
 
 TodoFeature.propTypes = {
     
 };
 
 function TodoFeature(props) {
-    const match = useRouteMatch()
 
     return (
         <div>
-            <Switch>
-                <Route path={match.path} component={ListPage} exact/>
-                <Route path={`${match.path}/:todoId`} component={DetailPage}/>
-            </Switch>
+            <h2>Todo share UI</h2>
+            <Routes>
+                <Route path='/' element={<ListPage/>}/>
+                <Route path='/:todoId' element={<DetailPage />} />
+
+                <Route path='*' element={<NotFound />} />
+            </Routes>
         </div>
     );
 }

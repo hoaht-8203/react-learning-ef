@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useMemo, useState } from 'react';
 import TodoList from '../../components/TodoList'
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 
 ListPage.propTypes = {
     
@@ -25,8 +26,18 @@ const initTodoList = [
 ]
 
 function ListPage(props) {
+    const location = useLocation()
+    const navigate = useNavigate()
     const [todoList, setTodoList] = useState(initTodoList)
-    const [filterTodoList, setFilterTodoList] = useState('all')
+    const [filterTodoList, setFilterTodoList] = useState(() => {
+        const params = queryString.parse(location.search)
+        return params.status || 'all'
+    })
+    
+    useEffect(() => {
+        const params = queryString.parse(location.search)
+        setFilterTodoList(params.status || 'all')
+    }, [location.search])
 
     const handleTodoClick = (todo, index) => {
         const newTodoList = [...todoList]
@@ -42,24 +53,35 @@ function ListPage(props) {
     }
 
     const handleShowAll = () => {
-        setFilterTodoList('all')
+        const queryParams = { status: 'all' }
+        navigate({
+            search: queryString.stringify(queryParams)
+        })
     }
 
     const handleShowCompleted = () => {
-        setFilterTodoList('completed')
+        const queryParams = { status: 'completed' }
+        navigate({
+            search: queryString.stringify(queryParams)
+        })
     }
 
     const handleShowNew = () => {
-        setFilterTodoList('new')
+        const queryParams = { status: 'new' }
+        navigate({
+            search: queryString.stringify(queryParams)
+        })
     }
 
-    const renderFilterTodoList = todoList.filter((todo) => {
-        if (filterTodoList === 'all') {
-            return todo;
-        } else {
-            return filterTodoList === todo.status
-        }
-    })
+    const renderFilterTodoList = useMemo(() => {
+        return todoList.filter((todo) => {
+            if (filterTodoList === 'all') {
+                return todo;
+            } else {
+                return filterTodoList === todo.status
+            }
+        })
+    }, [todoList, filterTodoList])
 
     return (
         <div>

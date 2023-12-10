@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import PostList from './components/PostList';
 import './styles.css'
 import Loading from '../../components/Loading';
