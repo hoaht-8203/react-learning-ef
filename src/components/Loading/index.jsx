@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './styles.css'
+import './styles.css';
 
-Loading.propTypes = {
-    
-};
+Loading.propTypes = {};
 
 function Loading(props) {
-    return (
-        <h1>LOADING...</h1>
-    );
+    return <h1>LOADING...</h1>;
 }
 
 export default Loading;
