@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-DetailPage.propTypes = {
-    
-};
+DetailPage.propTypes = {};
 
 function DetailPage(props) {
     return (

@@ -9,17 +9,30 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 function App() {
+    // useEffect(() => {
+    //     const fetchProducts = async () => {
+    //         const params = {
+    //             _limit: 10,
+    //         };
+
+    //         const products = await productApi.getAll(params);
+    //         console.log(products);
+    //     };
+
+    //     fetchProducts();
+    // }, []);
+
     return (
         <div>
             <h1>Header</h1>
             <p>
                 <NavLink to="/todos" className={(nav) => (nav.isActive ? 'active-menu' : '')}>
                     Todos
-                </NavLink>{' '}
+                </NavLink>
                 -
                 <NavLink to="/albums" className={(nav) => (nav.isActive ? 'active-menu' : '')}>
                     albums
-                </NavLink>{' '}
+                </NavLink>
                 -
                 <NavLink to="/posts" className={(nav) => (nav.isActive ? 'active-menu' : '')}>
                     posts

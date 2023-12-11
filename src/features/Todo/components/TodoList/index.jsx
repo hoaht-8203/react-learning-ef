@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames'
-import './styles.css'
+import classnames from 'classnames';
+import './styles.css';
 
 TodoList.propTypes = {
     todoList: PropTypes.array,
@@ -13,31 +13,30 @@ TodoList.defaultProps = {
     todoList: [],
     onClinkTodo: null,
     displayType: 'all',
-}
+};
 
 function TodoList(props) {
-    const { todoList, onClinkTodo } = props
-    
+    const { todoList, onClinkTodo } = props;
+
     const handleTodoClick = (todo, index) => {
-        onClinkTodo(todo, index)
-    }
+        onClinkTodo(todo, index);
+    };
 
     return (
         <div>
             <ul>
                 {todoList.map((todo, index) => {
                     return (
-                        <li 
+                        <li
                             key={todo.id}
                             className={classnames({
                                 'todo-item': true,
-                                completed: todo.status === 'completed'
+                                completed: todo.status === 'completed',
                             })}
-                            onClick={() => handleTodoClick(todo, index)}
-                        >
+                            onClick={() => handleTodoClick(todo, index)}>
                             {todo.title}
                         </li>
-                    )
+                    );
                 })}
             </ul>
         </div>
