@@ -9,21 +9,29 @@ InputField.propTypes = {
     label: PropTypes.string,
     disabled: PropTypes.bool,
 };
-
 function InputField(props) {
     const { form, name, label, disabled } = props;
     const { control } = form;
-
     return (
-        <Controller
-            name={name}
-            control={control}
-            render={({ field }) => {
-                return (
-                    <TextField {...field} label={label} name={name} disabled={disabled} fullWidth />
-                );
-            }}
-        />
+        <>
+            <Controller
+                name={name}
+                control={control}
+                render={({ field, fieldState: { invalid, error } }) => {
+                    return (
+                        <TextField
+                            {...field}
+                            label={label}
+                            name={name}
+                            disabled={disabled}
+                            fullWidth
+                            error={invalid}
+                            helperText={error && error.message}
+                        />
+                    );
+                }}
+            />
+        </>
     );
 }
 

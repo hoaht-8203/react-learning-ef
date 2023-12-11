@@ -82,7 +82,16 @@ function ListPage(props) {
         });
     }, [todoList, filterTodoList]);
 
-    const handleTodoFormSubmit = () => {};
+    const handleTodoFormSubmit = (values) => {
+        const lastTodo = todoList[todoList.length - 1];
+        const newTodo = {
+            id: lastTodo.id + 1,
+            title: values.title,
+            status: 'new',
+        };
+        const newTodoList = [...todoList, newTodo];
+        setTodoList(newTodoList);
+    };
 
     return (
         <div>
