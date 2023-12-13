@@ -5,7 +5,8 @@ import AlbumFeature from './features/Album';
 import TodoFeature from './features/Todo';
 import ColorBox from './components/ColorBox';
 import NotFound from './components/NotFound';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import CounterFeature from './features/Counter';
+import { Route, Routes } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 function App() {
@@ -38,16 +39,15 @@ function App() {
                     posts
                 </NavLink>
             </p>
-
+            <hr />
             <Routes>
-                <Route path="/" element={<Navigate to="/todos" />} />
+                <Route path="/" element={<CounterFeature />} />
                 <Route path="/todos/*" element={<TodoFeature />} />
                 <Route path="/albums" element={<AlbumFeature />} />
                 <Route path="/posts" element={<PostFeature />} />
                 <Route path="/colorbox" element={<ColorBox />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-            <h1>Footer</h1>
         </div>
     );
 }
