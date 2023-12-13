@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import './styles.scss';
 import PlayCircle from '../PlayCircle';
 
 AlbumItem.propTypes = {
@@ -15,18 +15,16 @@ function AlbumItem(props) {
     const { albumItem } = props;
 
     return (
-        <div className="album">
-            <img src={albumItem.thumbnailUrl} alt="thumbnail album" />
-            <div className="album-content">
+        <div className="album album--active">
+            <div className="album__thumbnail">
+                <img src={albumItem.thumbnailUrl} alt="thumbnail album" />
+            </div>
+            <div className="album__name">
                 <h3>{albumItem.name}</h3>
             </div>
-            <a
-                href="https://soundcloud.com/liutiudiu/binz-hit-me-up-feat-nomovodka"
-                target="_blank"
-                className="playcircle"
-                rel="noreferrer">
+            <div className="album__action">
                 <PlayCircle size={30} />
-            </a>
+            </div>
         </div>
     );
 }

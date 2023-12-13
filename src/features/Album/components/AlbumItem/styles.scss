@@ -1,0 +1,35 @@
+.album {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0px 0px 10px rgb(203, 203, 203);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 400px;
+    position: relative;
+
+    &--active {
+        background-color: beige;
+    }
+
+    &__thumbnail {
+        & > img {
+            border-radius: 0.5rem;
+            width: 200px;
+            display: flex;
+        }
+    }
+
+    &__name {
+        & > h3 {
+            margin-top: 0;
+        }
+    }
+
+    &__action {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0.5rem;
+    }
+}

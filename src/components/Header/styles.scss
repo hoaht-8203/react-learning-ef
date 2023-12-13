@@ -1,0 +1,10 @@
+.header {
+    &__link {
+        color: white;
+        text-decoration: none;
+    }
+
+    &__link--active {
+        color: #b9b9b9;
+    }
+}
