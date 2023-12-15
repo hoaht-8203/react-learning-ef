@@ -52,7 +52,7 @@ export default function Header() {
 
             <Dialog open={open} disableEscapeKeyDown>
                 <DialogContent>
-                    <Register />
+                    <Register closeDialog={handleClose} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

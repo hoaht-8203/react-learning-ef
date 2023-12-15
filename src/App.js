@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import Header from 'components/Header';
+import { useSnackbar } from 'notistack';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import ColorBox from './components/ColorBox';
@@ -9,6 +10,15 @@ import CounterFeature from './features/Counter';
 import TodoFeature from './features/Todo';
 
 function App() {
+    const { enqueueSnackbar } = useSnackbar();
+
+    const openNofi = () => {
+        enqueueSnackbar('This is nofication', {
+            autoHideDuration: 2000,
+            variant: 'success',
+        });
+    };
+
     // useEffect(() => {
     //     const fetchProducts = async () => {
     //         const params = {
@@ -25,6 +35,7 @@ function App() {
     return (
         <>
             <Header />
+            <button onClick={openNofi}>Show nofi</button>
 
             <Container maxWidth="lg">
                 <Routes>
