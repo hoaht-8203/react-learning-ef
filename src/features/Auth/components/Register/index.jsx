@@ -24,7 +24,7 @@ function Register(props) {
         try {
             values.username = values.email;
             const actionRegister = register(values);
-            const resultAction = dispatch(actionRegister);
+            const resultAction = await dispatch(actionRegister);
             const user = unwrapResult(resultAction);
             if (user) {
                 enqueueSnackbar('Register succesfully', { variant: 'success' });

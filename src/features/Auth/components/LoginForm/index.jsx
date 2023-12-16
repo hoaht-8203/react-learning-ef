@@ -23,43 +23,28 @@ const ButtonRegister = styled(Button)({
     },
 });
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
-RegisterForm.defaultProps = {
+LoginForm.defaultProps = {
     onSubmit: null,
 };
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const { onSubmit } = props;
 
     const schema = yup
         .object({
-            fullname: yup
-                .string()
-                .required('Please enter full name!')
-                .test('should has at least two word!', 'PLease enter at least two word!', (value) => {
-                    return value.trim().split(' ').length >= 2;
-                })
-                .min(5, 'Full name is too short!')
-                .max(30, 'Full name is too long!'),
-            email: yup.string().required('Please enter email!').email('Email is not valid!'),
-            password: yup
-                .string()
-                .required('Please enter password!')
-                .min(8, 'Password minimum 8 characters!')
-                .max(20, 'Password maximum 20 characters!'),
-            passwordConfirm: yup.string().oneOf([yup.ref('password')], 'Password confirm not match!'),
+            identifier: yup.string().required('Please enter email!').email('Email is not valid!'),
+            password: yup.string().required('Please enter password!'),
         })
         .required();
 
     const form = useForm({
         defaultValues: {
-            fullname: '',
-            email: '',
+            identifier: '',
             password: '',
-            passwordConfirm: '',
         },
         resolver: yupResolver(schema),
     });
@@ -80,25 +65,19 @@ function RegisterForm(props) {
                     <LockOutlined />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Sign in
                 </Typography>
                 <Box sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <InputField name="fullname" fullWidth id="fullname" label="Full Name" form={form} />
+                            <InputField name="identifier" fullWidth id="email" label="Email Address" form={form} />
                         </Grid>
                         <Grid item xs={12}>
-                            <InputField name="email" fullWidth id="email" label="Email Address *" form={form} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <PasswordField name="password" label="Password *" form={form} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <PasswordField name="passwordConfirm" label="Password Confirm *" form={form} />
+                            <PasswordField name="password" label="Password" form={form} />
                         </Grid>
                     </Grid>
                     <ButtonRegister disabled={isSubmitting} type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-                        Sign Up
+                        Sign in
                     </ButtonRegister>
                 </Box>
             </BoxRegister>
@@ -106,4 +85,4 @@ function RegisterForm(props) {
     );
 }
 
-export default RegisterForm;
+export default LoginForm;
