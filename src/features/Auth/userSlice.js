@@ -3,18 +3,14 @@ import userApi from 'api/userApi';
 
 const actionRegister = createAsyncThunk('users/register', async (payload) => {
     // call Api to register
-    try {
-        const data = await userApi.register(payload);
+    const data = await userApi.register(payload);
 
-        // save data to local storage
-        localStorage.setItem('access_token', data.jwt);
-        localStorage.setItem('user', JSON.stringify(data.user));
+    // save data to local storage
+    localStorage.setItem('access_token', data.jwt);
+    localStorage.setItem('user', JSON.stringify(data.user));
 
-        //return use data
-        return data.user;
-    } catch (error) {
-        console.log(error);
-    }
+    //return use data
+    return data.user;
 });
 
 const userSlice = createSlice({

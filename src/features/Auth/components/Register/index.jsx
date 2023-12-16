@@ -21,13 +21,17 @@ function Register(props) {
     const register = actionRegister;
 
     const handleSubmit = async (values) => {
-        values.username = values.email;
-        const actionRegister = register(values);
-        const resultAction = await dispatch(actionRegister);
-        const user = unwrapResult(resultAction);
-        if (user) {
-            enqueueSnackbar('Register succesfully', { variant: 'success' });
-            if (closeDialog) closeDialog();
+        try {
+            values.username = values.email;
+            const actionRegister = register(values);
+            const resultAction = dispatch(actionRegister);
+            const user = unwrapResult(resultAction);
+            if (user) {
+                enqueueSnackbar('Register succesfully', { variant: 'success' });
+                if (closeDialog) closeDialog();
+            }
+        } catch (error) {
+            enqueueSnackbar(error.message, { variant: 'error' });
         }
     };
 
