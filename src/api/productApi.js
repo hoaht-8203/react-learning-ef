@@ -5,11 +5,11 @@ const productApi = {
         const url = '/products';
 
         const newParams = { ...params };
-        if (params._page) {
-            newParams._start = params._page <= 1 ? 0 : (params._page - 1) * (params._limit || 20);
-        } else {
-            newParams._start = 0;
-        }
+
+        newParams._limit = params._limit || 16;
+        newParams._page = params._page || 0;
+
+        newParams._start = newParams._page <= 1 ? 0 : (newParams._page - 1) * newParams._limit;
 
         delete newParams._page;
 
@@ -19,8 +19,8 @@ const productApi = {
         return {
             data: productList,
             pagination: {
-                page: params._page,
-                limit: params._limit,
+                page: Number(params._page),
+                limit: Number(newParams._limit),
                 total: count,
             },
         };

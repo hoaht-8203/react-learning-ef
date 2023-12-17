@@ -1,4 +1,5 @@
 import { Box, Card, CardContent, CardMedia, Chip, Paper, Typography } from '@mui/material';
+import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -41,9 +42,7 @@ const ProductTitle = styled(Typography)({
 });
 
 function ProductCard({ product }) {
-    const thumbnail = product.thumbnail
-        ? `https://api.ezfrontend.com${product.thumbnail.url}`
-        : 'https://placehold.co/400x400?font=roboto&text=null%20image';
+    const thumbnail = product.thumbnail ? `${STATIC_HOST}${product.thumbnail.url}` : `${THUMBNAIL_PLACEHOLDER}`;
 
     return (
         <Paper elevation={0}>
