@@ -1,8 +1,9 @@
 import { Grid, Paper } from '@mui/material';
 import productApi from 'api/productApi';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductList from '../components/ProductList';
 
 ListPage.propTypes = {};
 
@@ -17,14 +18,18 @@ const RightGrid = styled(Grid)({
 });
 
 function ListPage(props) {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await productApi.getAll({ _page: 2, _limit: 10 });
-                console.log(response);
+                const data = await productApi.getAll({ _page: 2, _limit: 16 });
+                setProducts(data.data);
             } catch (error) {
                 console.log('error api: ', error);
             }
+            setLoading(false);
         };
 
         fetchProduct();
@@ -36,9 +41,7 @@ function ListPage(props) {
                 <LeftGrid item>
                     <Paper elevation={0}>filter</Paper>
                 </LeftGrid>
-                <RightGrid item>
-                    <ProductSkeletonList />
-                </RightGrid>
+                <RightGrid item>{loading ? <ProductSkeletonList /> : <ProductList data={products} />}</RightGrid>
             </Grid>
         </div>
     );

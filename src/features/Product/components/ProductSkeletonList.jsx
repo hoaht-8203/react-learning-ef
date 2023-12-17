@@ -36,11 +36,12 @@ function ProductSkeletonList({ length }) {
                             <Paper elevation={0}>
                                 <StyledCard>
                                     <CardMedia>
-                                        <Skeleton variant="rectangular" width="100%" height={118} />
+                                        <Skeleton variant="rectangular" width="100%" height={200} />
                                     </CardMedia>
                                     <StyledCardContent>
                                         <Skeleton />
                                         <Skeleton width="60%" />
+                                        <Skeleton width="30%" />
                                     </StyledCardContent>
                                 </StyledCard>
                             </Paper>

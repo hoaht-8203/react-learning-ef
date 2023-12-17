@@ -5,8 +5,7 @@ ProductFeature.propTypes = {};
 
 function ProductFeature(props) {
     return (
-        <div>
-            Product Feature
+        <div style={{ marginTop: '2rem' }}>
             <Routes>
                 <Route path="/" element={<ListPage />} />
             </Routes>
