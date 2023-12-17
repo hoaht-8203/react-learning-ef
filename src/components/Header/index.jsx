@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { AccountCircle } from '@mui/icons-material';
 import DoDisturbOnOutlinedIcon from '@mui/icons-material/DoDisturbOnOutlined';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -9,11 +10,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
+import { logout } from 'features/Auth/userSlice';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import './styles.scss';
-import { useSelector } from 'react-redux';
-import { AccountCircle } from '@mui/icons-material';
 
 const CloseButton = styled(IconButton)({
     position: 'absolute',
@@ -41,6 +42,7 @@ export default function Header() {
     const [mode, setMode] = useState(MODE.LOGIN);
     const [anchorEl, setAnchorEl] = useState(null);
     const openAccountMenu = Boolean(anchorEl);
+    const dispatch = useDispatch();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,6 +57,11 @@ export default function Header() {
     };
 
     const handleCloseMenuAccount = (event) => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
         setAnchorEl(null);
     };
 
@@ -94,7 +101,7 @@ export default function Header() {
                                 }}>
                                 <MenuItem onClick={handleCloseMenuAccount}>Profile</MenuItem>
                                 <MenuItem onClick={handleCloseMenuAccount}>My account</MenuItem>
-                                <MenuItem onClick={handleCloseMenuAccount}>Logout</MenuItem>
+                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             </Menu>
                         </>
                     )}
