@@ -82,6 +82,11 @@ export default function Header() {
                     </NavLink>
                     {isLoggedIn && (
                         <>
+                            <NavLink
+                                className={(nav) => (nav.isActive ? 'header__link--active' : 'header__link')}
+                                to="/products">
+                                <Button color="inherit">Product</Button>
+                            </NavLink>
                             <IconButton
                                 id="account-button"
                                 color="inherit"
