@@ -6,22 +6,37 @@ import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductSort from '../components/ProductSort';
+import { SALE_PRICE_ASC } from 'constants';
+import ProductFilters from '../components/ProductFilters';
 
 ListPage.propTypes = {};
 
 const LeftGrid = styled(Grid)({
     width: '230px',
     maxHeight: '100vh',
+    position: 'sticky',
+    top: '16px',
+    '&.MuiGrid-root': {
+        '&.MuiGrid-item': {
+            paddingTop: '0',
+        },
+    },
 });
 
 const RightGrid = styled(Grid)({
     width: 'calc(100% - 254px)',
     boxSizing: 'border-box',
+    '&.MuiGrid-root': {
+        '&.MuiGrid-item': {
+            paddingTop: '0',
+        },
+    },
 });
 
 const StyledPagination = styled(Pagination)({
     '&.MuiPagination-root': {
-        marginBottom: '1rem',
+        margin: '1.5rem 0',
         '.MuiPagination-ul': {
             justifyContent: 'center',
         },
@@ -41,20 +56,8 @@ function ListPage(props) {
     const [filter, setFilter] = useState({
         _limit: 12,
         _page: 1,
+        _sort: SALE_PRICE_ASC,
     });
-
-    const handlePageChange = (event, page) => {
-        if (page !== pagination.page) {
-            const newFilter = {
-                ...filter,
-                _page: page,
-            };
-            navigate({
-                search: queryString.stringify(newFilter),
-            });
-            setFilter(newFilter);
-        }
-    };
 
     useEffect(() => {
         setLoading(true);
@@ -74,20 +77,65 @@ function ListPage(props) {
         fetchProduct();
     }, [filter, location.search]);
 
+    const handlePageChange = (event, page) => {
+        if (page !== pagination.page) {
+            const newFilter = {
+                ...filter,
+                _page: page,
+            };
+            navigate({
+                search: queryString.stringify(newFilter),
+            });
+            setFilter(newFilter);
+        }
+    };
+
+    const handleChangeTab = (event, newValue) => {
+        const newFilter = {
+            ...filter,
+            _page: 1,
+            _sort: newValue,
+        };
+        navigate({
+            search: queryString.stringify(newFilter),
+        });
+        setFilter(newFilter);
+    };
+
+    const handleChangeCategory = (category) => {
+        console.log(category.id, filter['category.id']);
+        if (filter['category.id'] !== category.id) {
+            const newFilter = {
+                ...filter,
+                _page: 1,
+                'category.id': category.id,
+            };
+            navigate({
+                search: queryString.stringify(newFilter),
+            });
+            setFilter(newFilter);
+        }
+    };
+
     return (
         <div>
             <Grid container spacing={2}>
                 <LeftGrid item>
-                    <Paper elevation={0}>filter</Paper>
+                    <Paper sx={{ borderRadius: '0.5rem' }} elevation={0}>
+                        <ProductFilters onChange={handleChangeCategory} />
+                    </Paper>
                 </LeftGrid>
                 <RightGrid item>
+                    <ProductSort sortValue={filter._sort} handleChangeTab={handleChangeTab} />
+
+                    {loading ? <ProductSkeletonList /> : <ProductList data={products} />}
+
                     <StyledPagination
                         shape="rounded"
                         count={Math.ceil(pagination.total / pagination.limit)}
                         page={pagination.page}
                         onChange={handlePageChange}
                     />
-                    {loading ? <ProductSkeletonList /> : <ProductList data={products} />}
                 </RightGrid>
             </Grid>
         </div>
