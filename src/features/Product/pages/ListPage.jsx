@@ -120,7 +120,7 @@ function ListPage(props) {
             <Grid container spacing={2}>
                 <LeftGrid item>
                     <Paper sx={{ borderRadius: '0.5rem' }} elevation={0}>
-                        <ProductFilters onChange={handleChangeFilter} />
+                        <ProductFilters onChange={handleChangeFilter} filter={filter} />
                     </Paper>
                 </LeftGrid>
                 <RightGrid item>

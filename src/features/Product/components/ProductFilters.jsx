@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import FilterByCategory from './Filters/FilterByCategory';
 import FilterByPrice from './Filters/FilterByPrice';
+import FilterByService from './Filters/FilterByService';
 
 ProductFilters.propTypes = {
     onChange: PropTypes.func,
+    filter: PropTypes.object,
 };
 
-function ProductFilters({ onChange }) {
+function ProductFilters({ onChange, filter }) {
     const handleChangeCategory = (category) => {
         if (!onChange) return;
 
@@ -29,10 +31,20 @@ function ProductFilters({ onChange }) {
         });
     };
 
+    const handleChangeService = (values) => {
+        if (!onChange) return;
+
+        onChange({
+            _page: 1,
+            ...values,
+        });
+    };
+
     return (
         <Box>
             <FilterByCategory onChange={handleChangeCategory} />
             <FilterByPrice onChange={handleChangePrice} />
+            <FilterByService onChange={handleChangeService} filter={filter} />
         </Box>
     );
 }
