@@ -1,14 +1,14 @@
 import { Grid, Pagination, Paper } from '@mui/material';
 import productApi from 'api/productApi';
+import { ORIGINAL_PRICE_ASC } from 'constants';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
+import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductSort from '../components/ProductSort';
-import { SALE_PRICE_ASC } from 'constants';
-import ProductFilters from '../components/ProductFilters';
 
 ListPage.propTypes = {};
 
@@ -56,7 +56,7 @@ function ListPage(props) {
     const [filter, setFilter] = useState({
         _limit: 12,
         _page: 1,
-        _sort: SALE_PRICE_ASC,
+        _sort: ORIGINAL_PRICE_ASC,
     });
 
     useEffect(() => {
@@ -102,19 +102,17 @@ function ListPage(props) {
         setFilter(newFilter);
     };
 
-    const handleChangeCategory = (category) => {
-        console.log(category.id, filter['category.id']);
-        if (filter['category.id'] !== category.id) {
-            const newFilter = {
+    const handleChangeFilter = (newFilter) => {
+        navigate({
+            search: queryString.stringify({
                 ...filter,
-                _page: 1,
-                'category.id': category.id,
-            };
-            navigate({
-                search: queryString.stringify(newFilter),
-            });
-            setFilter(newFilter);
-        }
+                ...newFilter,
+            }),
+        });
+        setFilter({
+            ...filter,
+            ...newFilter,
+        });
     };
 
     return (
@@ -122,7 +120,7 @@ function ListPage(props) {
             <Grid container spacing={2}>
                 <LeftGrid item>
                     <Paper sx={{ borderRadius: '0.5rem' }} elevation={0}>
-                        <ProductFilters onChange={handleChangeCategory} />
+                        <ProductFilters onChange={handleChangeFilter} />
                     </Paper>
                 </LeftGrid>
                 <RightGrid item>

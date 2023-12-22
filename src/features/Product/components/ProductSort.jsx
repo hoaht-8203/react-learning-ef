@@ -1,9 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Box, Tab, Tabs } from '@mui/material';
-import { SALE_PRICE_ASC } from 'constants';
-import { SALE_PRICE_DESC } from 'constants';
-import { PROMOTION_PERCENT_DESC } from 'constants';
+import { ORIGINAL_PRICE_ASC, ORIGINAL_PRICE_DESC, PROMOTION_PERCENT_DESC } from 'constants';
+import PropTypes from 'prop-types';
 
 ProductSort.propTypes = {
     sortValue: PropTypes.string.isRequired,
@@ -20,8 +17,8 @@ function ProductSort({ sortValue, handleChangeTab }) {
                 borderTopRightRadius: '0.5rem',
             }}>
             <Tabs value={sortValue} onChange={handleChangeTab} aria-label="disabled tabs example">
-                <Tab label="Giá thấp tới cao" value={SALE_PRICE_ASC} />
-                <Tab label="Giá cao tới thấp" value={SALE_PRICE_DESC} />
+                <Tab label="Giá thấp tới cao" value={ORIGINAL_PRICE_ASC} />
+                <Tab label="Giá cao tới thấp" value={ORIGINAL_PRICE_DESC} />
                 <Tab label="Giảm giá" value={PROMOTION_PERCENT_DESC} />
             </Tabs>
         </Box>
